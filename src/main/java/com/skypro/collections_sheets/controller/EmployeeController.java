@@ -5,13 +5,11 @@ import com.skypro.collections_sheets.exceptions.EmployeeAlreadyAddedException;
 import com.skypro.collections_sheets.exceptions.EmployeeNotFoundException;
 import com.skypro.collections_sheets.exceptions.EmployeeStoragelsFullException;
 import com.skypro.collections_sheets.service.EmployeeService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/employee")
+
 public class EmployeeController {
 private final EmployeeService employeeService;
 
