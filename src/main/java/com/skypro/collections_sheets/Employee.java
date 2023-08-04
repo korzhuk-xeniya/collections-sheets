@@ -3,26 +3,26 @@ package com.skypro.collections_sheets;
 import java.util.Objects;
 
 public class Employee {
-    private String name;
+    private String firstName;
 
     private String lastName;
 
-    public Employee(String lastName, String name) {
+    public Employee(String lastName, String firstName) {
         this.lastName = lastName;
-        this.name = name;
+        this.firstName = firstName;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
     @Override
     public String toString () {
-        return "Фамилия Имя " + lastName + " " + name + " " ;
+        return "Фамилия Имя " + lastName + " " + firstName + " " ;
     }
 
     @Override
@@ -30,12 +30,12 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return Objects.equals(name, employee.name) && Objects.equals(lastName, employee.lastName);
+        return Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, lastName);
+        return Objects.hash(firstName, lastName);
     }
 
     }
