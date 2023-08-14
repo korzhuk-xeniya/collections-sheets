@@ -6,57 +6,54 @@ import com.skypro.collections_sheets.exceptions.EmployeeNotFoundException;
 import com.skypro.collections_sheets.exceptions.EmployeeStoragelsFullException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private final Map<Employee> employeeMap;
+    private final Map<String, Employee> employees;
+
     private static final int MAX_NUMBER_OF_EMPLOYEE = 11;
 
-    public EmployeeServiceImpl(Map<Employee> employeeMap, Employee employee) {
-        this.employeeMap = new HashMap<> (Map.of(
-            new Employee("Иванов", "Иван"),
-            new Employee("Перова", "Наталья"),
-            new Employee("Носова", "Анна"),
-            new Employee("Семенова", "Ольга"),
-            new Employee("Лазарев", "Иван "),
-            new Employee("Лубков", "Павел"),
-            new Employee("Смирнова", "Ирина"),
-            new Employee("Тарасов", "Дмитрий"),
-            new Employee("Миронова", "Татьяна")
-    ));
+    public String EmployeeServiceImpl() {
+        this.employees = new HashMap<>();
 
-    @Override
-    public void addEmployee( Employee  employee) {
-        if (MAX_NUMBER_OF_EMPLOYEE == employeeMap.size()) {
-            throw new EmployeeStoragelsFullException();
-        }
-        String key = firstName + lastName;
-        if (employeeMap.containsK  (employee)) {
-            throw new EmployeeAlreadyAddedException();
-        }
-        employeeMap.add(employee);
-    }
+        @Override
+        public void addEmployee (String lastName, String firstName ){
+            Employee employee = new Employee(lastName, firstName);
 
-    @Override
-    public void removeEmployee(Employee employee) {
-        if (!employeeMap.contains(employee)) {
-            throw new EmployeeNotFoundException();
-        }
-        employeeMap.remove((Employee) employee);
-    }
+            if (MAX_NUMBER_OF_EMPLOYEE == employees.size()) {
+                throw new EmployeeStoragelsFullException();
+            }
 
-    @Override
-    public void findEmployee(Employee employee) {
-        if (!employeeMap.contains(employee)) {
-            throw new EmployeeNotFoundException("EmployeeNotFound Такой сотрудник не найден");
+            if (employees.containsKey(employee.getFullName())) {
+                throw new EmployeeAlreadyAddedException();
+            }
+            employees.put(employee.getFullName(), employee);
         }
-        employeeMap.contains(employee);
-    }
-    @Override
-    public String outputEmployee() {
-        return employeeMap.toString();
+
+        @Override
+        public void removeEmployee (String lastName, String firstName){
+            Employee employee = new Employee(lastName, firstName);
+            if (!employees.containsKey(employee.getFullName())) {
+                throw new EmployeeNotFoundException();
+            }
+            employees.remove(employee.getFullName());
+        }
+
+        @Override
+        public void findEmployee (String lastName, String firstName){
+            Employee employee = new Employee(lastName, firstName);
+
+            if (!employees.containsKey(employee.getFullName())) {
+                throw new EmployeeNotFoundException();
+            }
+            employees.get(employee.getFullName());
+        }
+        @Override
+        public String outputEmployee () {
+            return employees.toString();
+        }
     }
 }
