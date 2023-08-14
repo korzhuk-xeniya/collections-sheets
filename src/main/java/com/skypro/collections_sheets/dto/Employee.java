@@ -1,4 +1,4 @@
-package com.skypro.collections_sheets;
+package com.skypro.collections_sheets.dto;
 
 import java.util.Objects;
 

@@ -1,10 +1,8 @@
 package com.skypro.collections_sheets.exceptions;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus
-public class EmployeeAlreadyAddedException extends RuntimeException{
-    public EmployeeAlreadyAddedException(String message) {
-        super(message);
-    }
+@ResponseStatus (code = HttpStatus.BAD_REQUEST, reason = "В базе есть уже такой сотрудник")
+public class EmployeeAlreadyAddedException extends RuntimeException {
 }

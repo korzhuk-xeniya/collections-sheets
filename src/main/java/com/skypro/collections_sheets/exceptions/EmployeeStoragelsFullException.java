@@ -1,10 +1,9 @@
 package com.skypro.collections_sheets.exceptions;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus
+@ResponseStatus (code = HttpStatus.BAD_REQUEST, reason = "Превышен лимит сотрудников в компании")
 public class EmployeeStoragelsFullException extends RuntimeException{
-    public EmployeeStoragelsFullException(String message) {
-        super(message);
-    }
+
 }

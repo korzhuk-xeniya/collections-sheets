@@ -1,6 +1,6 @@
 package com.skypro.collections_sheets.controller;
 
-import com.skypro.collections_sheets.Employee;
+import com.skypro.collections_sheets.dto.Employee;
 import com.skypro.collections_sheets.exceptions.EmployeeAlreadyAddedException;
 import com.skypro.collections_sheets.exceptions.EmployeeNotFoundException;
 import com.skypro.collections_sheets.exceptions.EmployeeStoragelsFullException;

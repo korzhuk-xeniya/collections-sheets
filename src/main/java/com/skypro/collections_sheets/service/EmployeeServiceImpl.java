@@ -1,6 +1,6 @@
 package com.skypro.collections_sheets.service;
 
-import com.skypro.collections_sheets.Employee;
+import com.skypro.collections_sheets.dto.Employee;
 import com.skypro.collections_sheets.exceptions.EmployeeAlreadyAddedException;
 import com.skypro.collections_sheets.exceptions.EmployeeNotFoundException;
 import com.skypro.collections_sheets.exceptions.EmployeeStoragelsFullException;
@@ -11,8 +11,12 @@ import java.util.List;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-    int maxNumberOfEmployee = 11;
-    List<Employee> employeeList = new ArrayList<>(List.of(
+
+    private final Map<Employee> employeeMap;
+    private static final int MAX_NUMBER_OF_EMPLOYEE = 11;
+
+    public EmployeeServiceImpl(Map<Employee> employeeMap, Employee employee) {
+        this.employeeMap = new HashMap<> (Map.of(
             new Employee("Иванов", "Иван"),
             new Employee("Перова", "Наталья"),
             new Employee("Носова", "Анна"),
@@ -25,33 +29,34 @@ public class EmployeeServiceImpl implements EmployeeService {
     ));
 
     @Override
-    public void addEmployee(Employee employee) {
-        if (maxNumberOfEmployee == employeeList.size()) {
-            throw new EmployeeStoragelsFullException("ArrayIsFull Нельзя добавить сотрудника, достигнуто максимальное количество сотрудников");
+    public void addEmployee( Employee  employee) {
+        if (MAX_NUMBER_OF_EMPLOYEE == employeeMap.size()) {
+            throw new EmployeeStoragelsFullException();
         }
-        if (employeeList.contains(employee)) {
-            throw new EmployeeAlreadyAddedException("EmployeeAlreadyAdded Такой сотрудник уже есть");
+        String key = firstName + lastName;
+        if (employeeMap.containsK  (employee)) {
+            throw new EmployeeAlreadyAddedException();
         }
-        employeeList.add(employee);
+        employeeMap.add(employee);
     }
 
     @Override
     public void removeEmployee(Employee employee) {
-        if (!employeeList.contains(employee)) {
-            throw new EmployeeNotFoundException("EmployeeNotFound Такой сотрудник не найден");
+        if (!employeeMap.contains(employee)) {
+            throw new EmployeeNotFoundException();
         }
-        employeeList.remove((Employee) employee);
+        employeeMap.remove((Employee) employee);
     }
 
     @Override
     public void findEmployee(Employee employee) {
-        if (!employeeList.contains(employee)) {
+        if (!employeeMap.contains(employee)) {
             throw new EmployeeNotFoundException("EmployeeNotFound Такой сотрудник не найден");
         }
-        employeeList.contains(employee);
+        employeeMap.contains(employee);
     }
     @Override
     public String outputEmployee() {
-        return employeeList.toString();
+        return employeeMap.toString();
     }
 }

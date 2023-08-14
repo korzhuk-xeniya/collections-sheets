@@ -1,6 +1,6 @@
 package com.skypro.collections_sheets.service;
 
-import com.skypro.collections_sheets.Employee;
+import com.skypro.collections_sheets.dto.Employee;
 
 public interface EmployeeService {
     void addEmployee(Employee employee);
